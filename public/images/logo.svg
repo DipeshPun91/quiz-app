@@ -1,0 +1,59 @@
+<svg
+    viewBox="0 0 32 32"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#000000"
+>
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g
+    id="SVGRepo_tracerCarrier"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+    <g id="setting_2" transform="translate(0 -124)">
+        <circle
+        id="Ellipse_25"
+        data-name="Ellipse 25"
+        cx="3"
+        cy="3"
+        r="3"
+        transform="translate(13 137)"
+        fill="none"
+        stroke="#498efc"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        ></circle>
+        <path
+        id="Path_80"
+        data-name="Path 80"
+        d="M6.1,135.757l-2.122-4.95,2.829-2.829,4.95,2.122L12,130l2-5h4l2,5,.242.1,4.949-2.122,2.829,2.829-2.121,4.95L26,136l5,2v4l-5,2-.1.243,2.122,4.95-2.829,2.829-4.95-2.122L20,150l-2,5H14l-2-5-.243-.1-4.95,2.122-2.828-2.828,2.121-4.95L6,144l-5-2v-4l5-2Z"
+        fill="none"
+        stroke="#498efc"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        ></path>
+        <path
+        id="Path_81"
+        data-name="Path 81"
+        d="M16,147a7,7,0,0,0,7-7"
+        fill="none"
+        stroke="#f1d17c"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        ></path>
+        <path
+        id="Path_82"
+        data-name="Path 82"
+        d="M16,133a7,7,0,0,0-7,7"
+        fill="none"
+        stroke="#f1d17c"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        ></path>
+    </g>
+    </g>
+</svg>
