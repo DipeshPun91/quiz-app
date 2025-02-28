@@ -85,7 +85,6 @@ export default function QuizSetupPage() {
     } else {
       const formData = new FormData();
       formData.append("quizFile", selectedFile as Blob);
-      // API call logic here
       router.push("/quiz");
     }
   };

@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const features = [
   {
@@ -53,14 +54,16 @@ export default function Home() {
             Challenge yourself with thousands of questions across diverse
             categories. Learn, compete, and track your progress.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg hover:bg-blue-700 transition-colors flex items-center gap-2 mx-auto"
-          >
-            Start Quiz Now
-            <ArrowRightIcon className="w-5 h-5" />
-          </motion.button>
+          <Link href="/quiz-setup">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg hover:bg-blue-700 transition-colors flex items-center gap-2 mx-auto"
+            >
+              Start Quiz Now
+              <ArrowRightIcon className="w-5 h-5" />
+            </motion.button>
+          </Link>
         </motion.div>
 
         <motion.div
