@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Fireworks from "@/components/Fireworks";
 
 interface Question {
   question: string;
@@ -235,6 +236,10 @@ export default function QuizPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+
+      {showResults && score === questions.length && (
+        <Fireworks trigger={score === questions.length} />
+      )}
 
       <main className="container mx-auto px-4 sm:px-6 py-12">
         {!showResults ? (
