@@ -28,12 +28,12 @@ export default function QuizPage() {
   const [userAnswers, setUserAnswers] = useState<Answer[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [loading, setLoading] = useState(true);
   const [isAnswerSelected, setIsAnswerSelected] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
 
-  // Memoized search parameters with safe defaults
   const difficulty = useMemo(
     () => searchParams?.get("difficulty") || "medium",
     [searchParams]
@@ -167,18 +167,21 @@ export default function QuizPage() {
 
       if (isCorrect) setScore((prev) => prev + 1);
 
-      if (currentQuestionIndex < questions.length - 1) {
-        setTimeout(() => {
-          setCurrentQuestionIndex((prev) => prev + 1);
-          setTimeLeft(30);
-          setIsAnswerSelected(false);
-        }, 1000);
-      } else {
-        setShowResults(true);
-      }
+      setShowCorrectAnswer(true);
     },
     [currentQuestionIndex, isAnswerSelected, questions]
   );
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+      setTimeLeft(60);
+      setIsAnswerSelected(false);
+      setShowCorrectAnswer(false);
+    } else {
+      setShowResults(true);
+    }
+  };
 
   useEffect(() => {
     if (!loading && !showResults && timeLeft > 0) {
@@ -196,8 +199,9 @@ export default function QuizPage() {
     setUserAnswers([]);
     setShowResults(false);
     setScore(0);
-    setTimeLeft(30);
+    setTimeLeft(60);
     setIsAnswerSelected(false);
+    setShowCorrectAnswer(false);
   };
 
   if (loading || !paramsLoaded) {
@@ -239,7 +243,7 @@ export default function QuizPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            className="max-w-2xl mx-auto"
+            className="max-w-2xl mx-auto py-20"
           >
             <div className="mb-6 flex justify-between items-center">
               <p className="text-gray-600">
@@ -255,21 +259,49 @@ export default function QuizPage() {
               {currentQuestion.question}
             </h2>
 
-            <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {shuffledAnswers.map((answer, index) => (
                 <motion.button
                   key={index}
                   disabled={isAnswerSelected}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="p-4 text-left rounded-lg border border-gray-200 hover:border-blue-400 
-                           hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={`p-4 text-left rounded-lg border transition-colors 
+                    ${
+                      isAnswerSelected
+                        ? answer === currentQuestion.correct_answer
+                          ? "border-green-500 bg-green-50"
+                          : "border-red-200 bg-red-50"
+                        : "border-gray-200 hover:border-blue-400 hover:bg-blue-50"
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
                   onClick={() => handleAnswerSelect(answer)}
                 >
                   {answer}
                 </motion.button>
               ))}
             </div>
+
+            {showCorrectAnswer && (
+              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-green-700">
+                  Correct Answer: {currentQuestion.correct_answer}
+                </p>
+              </div>
+            )}
+
+            {isAnswerSelected && (
+              <div className="mt-6 flex justify-end">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+                  onClick={handleNextQuestion}
+                >
+                  {currentQuestionIndex < questions.length - 1
+                    ? "Next Question"
+                    : "Finish Quiz"}
+                </motion.button>
+              </div>
+            )}
           </motion.div>
         ) : (
           <div className="max-w-2xl mx-auto text-center">
